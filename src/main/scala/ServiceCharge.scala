@@ -4,13 +4,13 @@ object ServiceCharge {
     list.filter(!_.isDrink).nonEmpty
   }
 
-  def calculateServiceChargeAmount(list: List[Menu.Item]):BigDecimal = {
+  def calculateServiceChargeAmountAndLimit(list: List[Menu.Item]):(BigDecimal, Option[BigDecimal]) = {
     isServiceChargeApplied(list) match {
-      case false => 0
+      case false => (0, None)
       case true => {
         list.filter(_.isHotFood).nonEmpty match {
-          case true => 0.2
-          case false => 0.1
+          case true => (0.2,Some(20))
+          case false => (0.1,None)
         }
       }
     }
@@ -18,7 +18,17 @@ object ServiceCharge {
 
   def calculateServiceCharge(list:List[Menu.Item]): BigDecimal = {
     isServiceChargeApplied(list) match {
-      case true => StandardBill.calculateTotal(list) * calculateServiceChargeAmount(list)
+      case true => {
+        val (percent, limit) = calculateServiceChargeAmountAndLimit(list)
+        val total = StandardBill.calculateTotal(list)
+        val noLimitServiceCharge = total * percent
+        limit match {
+          case None => noLimitServiceCharge
+          case Some(fixedAmount) => {
+            if (noLimitServiceCharge > fixedAmount) fixedAmount else noLimitServiceCharge
+          }
+        }
+      }
       case false => 0
     }
   }
