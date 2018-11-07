@@ -37,5 +37,9 @@ class ServiceChargeTest extends FlatSpec with Matchers {
 
   }
 
+  "When purchased items include any food" should " apply a service charge of 10% to the total bill (rounded to 2 decimal places) (works as there are no items fractioned below 50p)" in {
+  }
+
+
 
 }
