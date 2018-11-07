@@ -41,5 +41,13 @@ class ServiceChargeTest extends FlatSpec with Matchers {
   }
 
 
+  "When purchased items include any hot food" should " apply a service charge of 20% to the total bil" in {
+    val items = List(ColaCold,CoffeeHot,SteakSandwichHot)
+    val totalBill = StandardBill.calculateTotal(items)
+    val serviceCharge = ServiceCharge.calculateServiceCharge(items)
+
+    serviceCharge shouldEqual (totalBill * 0.2)
+
+  }
 
 }
