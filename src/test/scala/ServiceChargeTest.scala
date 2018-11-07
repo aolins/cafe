@@ -27,5 +27,15 @@ class ServiceChargeTest extends FlatSpec with Matchers {
 
   }
 
+  "When purchased items does not include any food" should " apply a service charge of 0 " in {
+
+    val items = List(ColaCold,CoffeeHot)
+    val totalBill = StandardBill.calculateTotal(items)
+    val serviceCharge = ServiceCharge.calculateServiceCharge(items)
+
+    serviceCharge shouldEqual 0
+
+  }
+
 
 }
