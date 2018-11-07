@@ -4,4 +4,6 @@ object ServiceCharge {
     list.filter(!_.isDrink).nonEmpty
   }
 
+  def calculateServiceCharge(list:List[Menu.Item]): BigDecimal = ???
+
 }
