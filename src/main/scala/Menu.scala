@@ -1,15 +1,15 @@
 object Menu {
 
-  class Item(
+  case class Item(
     val price: BigDecimal,
     val name:String,
     val isDrink:Boolean = false,
     val isHotFood:Boolean = false
   )
 
-  object ColaCold extends Item(0.5, "Cola - Cold", true)
-  object CoffeeHot extends Item(1, "Coffee - Hot", true)
-  object CheeseSandwichCold extends Item(2, "Cheese Sandwich - Cold")
-  object SteakSandwichHot extends Item(4.5, "Steak Sandwich - Hot", isHotFood = true)
+  val CoffeeHot =  Item(1, "Coffee - Hot", true)
+  val ColaCold = Item(0.5, "Cola - Cold", true)
+  val CheeseSandwichCold = Item(2, "Cheese Sandwich - Cold")
+  val SteakSandwichHot = Item(4.5, "Steak Sandwich - Hot", isHotFood = true)
 
 }
